@@ -1,0 +1,8 @@
+---
+  - name: Deploy war file
+    copy: "src={{war_name}}.war dest={{war_deploy_path}}/{{war_name}}.war"
+    notify: restart tomcat
+# alternative for serving the file from URL
+#    get_url:
+#      url: "{{ war_url }}" 
+#      dest: "{{ war_deploy_path }}/{{ war_name }}.war"

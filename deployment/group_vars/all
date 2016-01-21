@@ -1,0 +1,5 @@
+war_deploy_path: /deployment/webapps
+war_name: HelloWorld 
+war_url: http://dl.dropbox.com/u/81233116/HelloWorld.war
+http_port: 8080
+https_port: 8443

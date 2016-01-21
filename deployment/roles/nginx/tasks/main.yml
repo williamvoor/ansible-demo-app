@@ -1,0 +1,36 @@
+---
+- name: NGINX | Installing NGINX repo rpm
+  yum:
+    name: http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+ 
+- name: NGINX | Installing NGINX
+  yum:
+    name: nginx
+    state: latest
+
+- name: Create nginx directories  
+  file: path=/etc/nginx/sites-enabled state=directory mode=0755
+
+- name: Install nginx configuration files
+  copy: src=nginx.conf dest=/etc/nginx/nginx.conf
+
+- name: Install nginx configuration files
+  copy: src=cert.crt dest=/etc/nginx/cert.crt
+
+- name: Install nginx configuration files
+  copy: src=cert.key dest=/etc/nginx/cert.key
+
+- name: Install nginx configuration files
+  copy: src=default dest=/etc/nginx/sites-enabled/default
+
+- name: Copy static html
+  copy: "src=index.html dest=/usr/share/nginx/html/index.html"
+
+- name: Copy static html
+  copy: "src=404.html dest=/usr/share/nginx/html/404.html"
+
+- name: Start nginx
+  command: nginx
+
+- name: wait for nginx to start
+  wait_for: port=80
